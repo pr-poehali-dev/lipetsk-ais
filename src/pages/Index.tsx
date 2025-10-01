@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import YandexMap from '@/components/YandexMap';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('main');
@@ -29,7 +30,8 @@ const Index = () => {
       time: 'Вечер',
       address: 'ул. Ленина, 45',
       schedule: 'ПН, СР, ПТ 17:00-18:30',
-      phone: '+7 (4742) 12-34-56'
+      phone: '+7 (4742) 12-34-56',
+      coordinates: [52.6088, 39.5993] as [number, number]
     },
     {
       id: 2,
@@ -42,7 +44,8 @@ const Index = () => {
       time: 'Вечер',
       address: 'пр. Победы, 12',
       schedule: 'ВТ, ЧТ 16:00-17:30',
-      phone: '+7 (4742) 23-45-67'
+      phone: '+7 (4742) 23-45-67',
+      coordinates: [52.5820, 39.5423] as [number, number]
     },
     {
       id: 3,
@@ -55,7 +58,8 @@ const Index = () => {
       time: 'Утро',
       address: 'ул. Гагарина, 78',
       schedule: 'СБ, ВС 10:00-12:00',
-      phone: '+7 (4742) 34-56-78'
+      phone: '+7 (4742) 34-56-78',
+      coordinates: [52.6150, 39.5890] as [number, number]
     },
     {
       id: 4,
@@ -68,7 +72,8 @@ const Index = () => {
       time: 'Выходные',
       address: 'ул. Московская, 23',
       schedule: 'СБ 14:00-16:00',
-      phone: '+7 (4742) 45-67-89'
+      phone: '+7 (4742) 45-67-89',
+      coordinates: [52.6070, 39.6020] as [number, number]
     },
     {
       id: 5,
@@ -81,7 +86,8 @@ const Index = () => {
       time: 'Вечер',
       address: 'пр. Мира, 56',
       schedule: 'ПН, СР, ПТ 18:00-19:30',
-      phone: '+7 (4742) 56-78-90'
+      phone: '+7 (4742) 56-78-90',
+      coordinates: [52.5900, 39.5500] as [number, number]
     },
     {
       id: 6,
@@ -94,7 +100,8 @@ const Index = () => {
       time: 'Вечер',
       address: 'ул. Спортивная, 10',
       schedule: 'ВТ, ЧТ, СБ 17:00-19:00',
-      phone: '+7 (4742) 67-89-01'
+      phone: '+7 (4742) 67-89-01',
+      coordinates: [52.6120, 39.5950] as [number, number]
     }
   ];
 
@@ -496,16 +503,15 @@ const Index = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Интерактивная карта организаций</CardTitle>
-                <CardDescription>Все секции и кружки Липецка на карте</CardDescription>
+                <CardDescription>Все секции и кружки Липецка на карте. Нажмите на метку, чтобы увидеть информацию</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="bg-muted rounded-lg h-[600px] flex items-center justify-center">
-                  <div className="text-center">
-                    <Icon name="Map" size={64} className="mx-auto text-muted-foreground mb-4" />
-                    <p className="text-lg font-semibold text-foreground mb-2">Карта будет здесь</p>
-                    <p className="text-muted-foreground">Интеграция с картографическим сервисом</p>
-                  </div>
-                </div>
+                <YandexMap 
+                  activities={activities}
+                  onActivitySelect={(activity) => {
+                    console.log('Selected activity:', activity);
+                  }}
+                />
               </CardContent>
             </Card>
           </TabsContent>
