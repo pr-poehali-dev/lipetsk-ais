@@ -207,22 +207,31 @@ const Index = () => {
         <div className="container mx-auto px-4 py-8">
           <TabsContent value="main" className="mt-0">
             <div className="space-y-8">
-              <section className="bg-gradient-to-br from-primary to-primary/80 rounded-lg p-8 text-primary-foreground">
-                <div className="max-w-3xl">
-                  <h2 className="text-3xl font-bold mb-3">Найдите идеальный кружок для вашего ребёнка</h2>
-                  <p className="text-lg opacity-90 mb-6">
-                    Более 500 секций и кружков Липецка в одной системе. 
-                    Удобный поиск, электронная запись и карта организаций.
-                  </p>
-                  <Button 
-                    size="lg" 
-                    variant="secondary"
-                    onClick={() => setActiveTab('search')}
-                    className="font-semibold"
-                  >
-                    Начать поиск
-                    <Icon name="ArrowRight" size={20} className="ml-2" />
-                  </Button>
+              <section className="relative bg-gradient-to-br from-primary to-primary/80 rounded-lg overflow-hidden">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ 
+                    backgroundImage: 'url(https://cdn.poehali.dev/files/371e05f6-e73f-4a55-8306-02dc4bcac750.jpg)',
+                    filter: 'brightness(0.4)'
+                  }}
+                />
+                <div className="relative z-10 p-8">
+                  <div className="max-w-3xl">
+                    <h2 className="text-3xl font-bold mb-3 text-white drop-shadow-lg">Найдите идеальный кружок для вашего ребёнка</h2>
+                    <p className="text-lg mb-6 text-white drop-shadow-md">
+                      Более 500 секций и кружков Липецка в одной системе. 
+                      Удобный поиск, электронная запись и карта организаций.
+                    </p>
+                    <Button 
+                      size="lg" 
+                      variant="secondary"
+                      onClick={() => setActiveTab('search')}
+                      className="font-semibold"
+                    >
+                      Начать поиск
+                      <Icon name="ArrowRight" size={20} className="ml-2" />
+                    </Button>
+                  </div>
                 </div>
               </section>
 
