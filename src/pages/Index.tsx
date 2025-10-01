@@ -17,6 +17,41 @@ const Index = () => {
   const [selectedPrice, setSelectedPrice] = useState('all');
   const [selectedTime, setSelectedTime] = useState('all');
   const [favorites, setFavorites] = useState<number[]>([]);
+  const [selectedChild, setSelectedChild] = useState('anna');
+
+  const children = [
+    {
+      id: 'anna',
+      name: 'Анна',
+      age: 10,
+      photo: 'https://cdn.poehali.dev/files/child-girl.jpg',
+      activities: ['Спортивная гимнастика', 'Вокальная студия'],
+      achievements: [
+        { id: 1, title: 'Диплом I степени', event: 'Городской конкурс "Юные таланты"', date: '2024-03-15', type: 'diploma', activity: 'Вокальная студия' },
+        { id: 2, title: 'Грамота за участие', event: 'Первенство области по гимнастике', date: '2024-02-20', type: 'certificate', activity: 'Спортивная гимнастика' },
+        { id: 3, title: 'Сертификат', event: 'Мастер-класс "Вокальное мастерство"', date: '2024-01-10', type: 'certificate', activity: 'Вокальная студия' }
+      ],
+      ratings: [
+        { activity: 'Спортивная гимнастика', teacher: 'Петрова М.И.', rating: 5, comment: 'Отличные результаты, высокая дисциплина', date: '2024-03-01' },
+        { activity: 'Вокальная студия', teacher: 'Сидорова Е.А.', rating: 5, comment: 'Прекрасный голос, хорошая артикуляция', date: '2024-02-15' }
+      ]
+    },
+    {
+      id: 'dmitry',
+      name: 'Дмитрий',
+      age: 12,
+      photo: 'https://cdn.poehali.dev/files/child-boy.jpg',
+      activities: ['Робототехника', 'Шахматный клуб'],
+      achievements: [
+        { id: 4, title: 'Диплом II степени', event: 'Областная олимпиада по робототехнике', date: '2024-04-05', type: 'diploma', activity: 'Робототехника' },
+        { id: 5, title: 'Грамота', event: 'Турнир по шахматам среди школьников', date: '2024-03-20', type: 'certificate', activity: 'Шахматный клуб' }
+      ],
+      ratings: [
+        { activity: 'Робототехника', teacher: 'Иванов С.П.', rating: 5, comment: 'Проявляет большой интерес к программированию', date: '2024-04-01' },
+        { activity: 'Шахматный клуб', teacher: 'Козлов А.В.', rating: 4, comment: 'Хорошо развита логика, требуется больше практики', date: '2024-03-15' }
+      ]
+    }
+  ];
 
   const activities = [
     {
@@ -269,6 +304,15 @@ const Index = () => {
                   {favorites.length}
                 </span>
               )}
+            </button>
+            <button
+              onClick={() => setActiveTab('portfolio')}
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors ${
+                activeTab === 'portfolio' ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+              }`}
+            >
+              <Icon name="Award" size={20} />
+              <span className="text-[10px] mt-1">Портфолио</span>
             </button>
           </div>
         </div>
@@ -687,6 +731,122 @@ const Index = () => {
                   ))}
                 </div>
               )}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="portfolio" className="mt-0">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="mb-4 sm:mb-6 px-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Портфолио</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">Достижения и оценки</p>
+              </div>
+
+              <div className="mb-4 sm:mb-6">
+                <Select value={selectedChild} onValueChange={setSelectedChild}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {children.map((child) => (
+                      <SelectItem key={child.id} value={child.id}>
+                        {child.name}, {child.age} лет
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {children.filter(c => c.id === selectedChild).map((child) => (
+                <div key={child.id} className="space-y-4 sm:space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex flex-col sm:flex-row items-center gap-4">
+                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-white text-3xl font-bold">
+                          {child.name[0]}
+                        </div>
+                        <div className="text-center sm:text-left flex-1">
+                          <CardTitle className="text-2xl">{child.name}</CardTitle>
+                          <CardDescription className="text-base">{child.age} лет</CardDescription>
+                          <div className="flex flex-wrap gap-2 mt-2 justify-center sm:justify-start">
+                            {child.activities.map((activity, idx) => (
+                              <Badge key={idx} variant="secondary">{activity}</Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                  </Card>
+
+                  <div>
+                    <h4 className="text-lg sm:text-xl font-bold mb-3 flex items-center gap-2">
+                      <Icon name="Award" size={24} className="text-primary" />
+                      Достижения ({child.achievements.length})
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3 sm:gap-4">
+                      {child.achievements.map((achievement) => (
+                        <Card key={achievement.id} className="hover:shadow-md transition-shadow">
+                          <CardContent className="pt-4 sm:pt-6">
+                            <div className="flex items-start gap-3 sm:gap-4">
+                              <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+                                achievement.type === 'diploma' ? 'bg-yellow-500/10' : 'bg-blue-500/10'
+                              }`}>
+                                <Icon 
+                                  name={achievement.type === 'diploma' ? 'Trophy' : 'Award'} 
+                                  size={24} 
+                                  className={achievement.type === 'diploma' ? 'text-yellow-600' : 'text-blue-600'}
+                                />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h5 className="font-semibold text-base sm:text-lg mb-1">{achievement.title}</h5>
+                                <p className="text-sm text-muted-foreground mb-2">{achievement.event}</p>
+                                <div className="flex flex-wrap gap-2 items-center text-xs sm:text-sm">
+                                  <Badge variant="outline">{achievement.activity}</Badge>
+                                  <span className="text-muted-foreground">{new Date(achievement.date).toLocaleDateString('ru-RU')}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg sm:text-xl font-bold mb-3 flex items-center gap-2">
+                      <Icon name="Star" size={24} className="text-primary" />
+                      Оценки педагогов
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3 sm:gap-4">
+                      {child.ratings.map((rating, idx) => (
+                        <Card key={idx}>
+                          <CardContent className="pt-4 sm:pt-6">
+                            <div className="space-y-3">
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1">
+                                  <h5 className="font-semibold text-sm sm:text-base mb-1">{rating.activity}</h5>
+                                  <p className="text-xs sm:text-sm text-muted-foreground">{rating.teacher}</p>
+                                </div>
+                                <div className="flex gap-1">
+                                  {[1, 2, 3, 4, 5].map((star) => (
+                                    <Icon 
+                                      key={star} 
+                                      name="Star" 
+                                      size={16} 
+                                      className={star <= rating.rating ? 'fill-yellow-500 text-yellow-500' : 'text-gray-300'}
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                              <p className="text-sm text-foreground bg-muted/50 p-3 rounded-lg">{rating.comment}</p>
+                              <p className="text-xs text-muted-foreground">{new Date(rating.date).toLocaleDateString('ru-RU')}</p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </TabsContent>
 
