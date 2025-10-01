@@ -144,29 +144,29 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-white border-b border-border sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-3 py-3 sm:px-4 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-                <Icon name="GraduationCap" className="text-primary-foreground" size={24} />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-primary rounded flex items-center justify-center">
+                <Icon name="GraduationCap" className="text-primary-foreground" size={20} />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Секции и кружки Липецка</h1>
-                <p className="text-xs text-muted-foreground">Автоматизированная информационная система</p>
+                <h1 className="text-base sm:text-xl font-bold text-foreground">Секции и кружки Липецка</h1>
+                <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Автоматизированная информационная система</p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="sm">
-                <Icon name="User" size={18} className="mr-2" />
-                Войти
+            <div className="flex gap-1 sm:gap-2">
+              <Button variant="ghost" size="sm" className="px-2 sm:px-4">
+                <Icon name="User" size={16} className="sm:mr-2" />
+                <span className="hidden sm:inline">Войти</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <div className="bg-white border-b border-border">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full pb-16 sm:pb-0">
+        <div className="hidden sm:block bg-white border-b border-border">
           <div className="container mx-auto px-4">
             <TabsList className="w-full justify-start h-auto p-0 bg-transparent border-0">
               <TabsTrigger 
@@ -218,9 +218,64 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-8">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border z-50 sm:hidden">
+          <div className="grid grid-cols-5 gap-1 px-2 py-2">
+            <button
+              onClick={() => setActiveTab('main')}
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors ${
+                activeTab === 'main' ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+              }`}
+            >
+              <Icon name="Home" size={20} />
+              <span className="text-[10px] mt-1">Главная</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('search')}
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors ${
+                activeTab === 'search' ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+              }`}
+            >
+              <Icon name="Search" size={20} />
+              <span className="text-[10px] mt-1">Поиск</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('map')}
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors ${
+                activeTab === 'map' ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+              }`}
+            >
+              <Icon name="Map" size={20} />
+              <span className="text-[10px] mt-1">Карта</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('bookings')}
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors relative ${
+                activeTab === 'bookings' ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+              }`}
+            >
+              <Icon name="Calendar" size={20} />
+              <span className="text-[10px] mt-1">Записи</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('favorites')}
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors relative ${
+                activeTab === 'favorites' ? 'text-primary bg-primary/10' : 'text-muted-foreground'
+              }`}
+            >
+              <Icon name="Heart" size={20} />
+              <span className="text-[10px] mt-1">Избранное</span>
+              {favorites.length > 0 && (
+                <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[8px] rounded-full w-4 h-4 flex items-center justify-center">
+                  {favorites.length}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
           <TabsContent value="main" className="mt-0">
-            <div className="space-y-8">
+            <div className="space-y-4 sm:space-y-8">
               <section className="relative bg-gradient-to-br from-primary to-primary/80 rounded-lg overflow-hidden">
                 <div 
                   className="absolute inset-0 bg-cover bg-center"
@@ -229,10 +284,10 @@ const Index = () => {
                     filter: 'brightness(0.4)'
                   }}
                 />
-                <div className="relative z-10 p-8">
+                <div className="relative z-10 p-4 sm:p-8">
                   <div className="max-w-3xl">
-                    <h2 className="text-3xl font-bold mb-3 text-white drop-shadow-lg">АИС «Секции и кружки Липецка»</h2>
-                    <p className="text-lg mb-6 text-white drop-shadow-md">
+                    <h2 className="text-xl sm:text-3xl font-bold mb-2 sm:mb-3 text-white drop-shadow-lg">АИС «Секции и кружки Липецка»</h2>
+                    <p className="text-sm sm:text-lg mb-4 sm:mb-6 text-white drop-shadow-md">
                       Автоматизированная информационная система для записи детей в секции и кружки. 
                       Умный поиск по параметрам, интерактивная карта организаций и электронная запись онлайн.
                     </p>
@@ -240,7 +295,7 @@ const Index = () => {
                       size="lg" 
                       variant="secondary"
                       onClick={() => setActiveTab('search')}
-                      className="font-semibold"
+                      className="font-semibold w-full sm:w-auto"
                     >
                       Начать поиск
                       <Icon name="ArrowRight" size={20} className="ml-2" />
@@ -250,8 +305,8 @@ const Index = () => {
               </section>
 
               <section>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Популярные направления</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-foreground">Популярные направления</h3>
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                   {['Спорт', 'Творчество', 'Наука', 'Техника'].map((category) => (
                     <Card 
                       key={category} 
@@ -334,17 +389,17 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="search" className="mt-0">
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg border border-border p-6">
-                <h3 className="text-xl font-bold mb-4 text-foreground">Умный поиск</h3>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="bg-white rounded-lg border border-border p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-foreground">Умный поиск</h3>
                 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <div>
                     <label className="text-sm font-medium mb-2 block text-foreground">Поиск по названию или организации</label>
                     <div className="relative">
                       <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                       <Input 
-                        placeholder="Введите название кружка или организации..." 
+                        placeholder="Введите название..." 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="pl-10"
@@ -352,7 +407,7 @@ const Index = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                     <div>
                       <label className="text-sm font-medium mb-2 block text-foreground">Район</label>
                       <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
@@ -452,13 +507,13 @@ const Index = () => {
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-foreground">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">
                     Найдено: {filteredActivities.length} {filteredActivities.length === 1 ? 'кружок' : 'кружков'}
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {filteredActivities.map((activity) => (
                     <Card key={activity.id} className="hover:shadow-lg transition-shadow">
                       <CardHeader>
@@ -523,34 +578,36 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="map" className="mt-0">
-            <Card>
-              <CardHeader>
-                <CardTitle>Интерактивная карта организаций</CardTitle>
-                <CardDescription>Все секции и кружки Липецка на карте. Нажмите на метку, чтобы увидеть информацию</CardDescription>
+            <Card className="border-0 sm:border">
+              <CardHeader className="px-3 sm:px-6">
+                <CardTitle className="text-lg sm:text-xl">Интерактивная карта организаций</CardTitle>
+                <CardDescription className="text-sm">Все секции и кружки Липецка на карте</CardDescription>
               </CardHeader>
-              <CardContent>
-                <YandexMap 
-                  activities={activities}
-                  onActivitySelect={(activity) => {
-                    console.log('Selected activity:', activity);
-                  }}
-                />
+              <CardContent className="px-0 sm:px-6">
+                <div className="h-[calc(100vh-16rem)] sm:h-[600px]">
+                  <YandexMap 
+                    activities={activities}
+                    onActivitySelect={(activity) => {
+                      console.log('Selected activity:', activity);
+                    }}
+                  />
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
 
           <TabsContent value="bookings" className="mt-0">
             <Card>
-              <CardHeader>
-                <CardTitle>Мои записи</CardTitle>
-                <CardDescription>История ваших записей в секции и кружки</CardDescription>
+              <CardHeader className="px-3 sm:px-6">
+                <CardTitle className="text-lg sm:text-xl">Мои записи</CardTitle>
+                <CardDescription className="text-sm">История ваших записей в секции и кружки</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <Icon name="Calendar" size={64} className="mx-auto text-muted-foreground mb-4" />
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">У вас пока нет записей</h3>
-                  <p className="text-muted-foreground mb-4">Запишитесь в понравившийся кружок, чтобы увидеть его здесь</p>
-                  <Button onClick={() => setActiveTab('search')}>
+              <CardContent className="px-3 sm:px-6">
+                <div className="text-center py-8 sm:py-12">
+                  <Icon name="Calendar" size={48} className="mx-auto text-muted-foreground mb-3 sm:mb-4" />
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-foreground">У вас пока нет записей</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4">Запишитесь в понравившийся кружок</p>
+                  <Button onClick={() => setActiveTab('search')} className="w-full sm:w-auto">
                     Найти кружок
                   </Button>
                 </div>
@@ -560,28 +617,28 @@ const Index = () => {
 
           <TabsContent value="favorites" className="mt-0">
             <div>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-foreground">Избранные кружки</h3>
-                <p className="text-muted-foreground">
+              <div className="mb-4 sm:mb-6 px-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Избранные кружки</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   {favoriteActivities.length === 0 ? 'Вы пока не добавили кружки в избранное' : `Добавлено: ${favoriteActivities.length}`}
                 </p>
               </div>
 
               {favoriteActivities.length === 0 ? (
                 <Card>
-                  <CardContent className="pt-12 pb-12">
+                  <CardContent className="pt-8 pb-8 sm:pt-12 sm:pb-12 px-3 sm:px-6">
                     <div className="text-center">
-                      <Icon name="Heart" size={64} className="mx-auto text-muted-foreground mb-4" />
-                      <h3 className="text-xl font-semibold mb-2 text-foreground">Избранное пусто</h3>
-                      <p className="text-muted-foreground mb-4">Добавляйте интересные кружки в избранное для быстрого доступа</p>
-                      <Button onClick={() => setActiveTab('search')}>
+                      <Icon name="Heart" size={48} className="mx-auto text-muted-foreground mb-3 sm:mb-4" />
+                      <h3 className="text-lg sm:text-xl font-semibold mb-2 text-foreground">Избранное пусто</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4">Добавляйте интересные кружки</p>
+                      <Button onClick={() => setActiveTab('search')} className="w-full sm:w-auto">
                         Найти кружки
                       </Button>
                     </div>
                   </CardContent>
                 </Card>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {favoriteActivities.map((activity) => (
                     <Card key={activity.id} className="hover:shadow-lg transition-shadow">
                       <CardHeader>
