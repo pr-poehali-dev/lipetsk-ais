@@ -50,6 +50,20 @@ const Index = () => {
         { activity: 'Робототехника', teacher: 'Иванов С.П.', rating: 5, comment: 'Проявляет большой интерес к программированию', date: '2024-04-01' },
         { activity: 'Шахматный клуб', teacher: 'Козлов А.В.', rating: 4, comment: 'Хорошо развита логика, требуется больше практики', date: '2024-03-15' }
       ]
+    },
+    {
+      id: 'dasha',
+      name: 'Даша',
+      age: 9,
+      photo: 'https://cdn.poehali.dev/files/child-girl.jpg',
+      activities: ['Каратэ'],
+      achievements: [
+        { id: 6, title: 'Белый пояс', event: 'Аттестация по каратэ', date: '2024-05-10', type: 'certificate', activity: 'Каратэ' },
+        { id: 7, title: 'Диплом за участие', event: 'Турнир "Белый тигр"', date: '2024-06-15', type: 'diploma', activity: 'Каратэ' }
+      ],
+      ratings: [
+        { activity: 'Каратэ', teacher: 'Смирнов В.Л.', rating: 5, comment: 'Отличная техника ударов, высокая концентрация', date: '2024-06-01' }
+      ]
     }
   ];
 
