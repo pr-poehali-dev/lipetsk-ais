@@ -102,6 +102,20 @@ const Index = () => {
       schedule: 'ВТ, ЧТ, СБ 17:00-19:00',
       phone: '+7 (4742) 67-89-01',
       coordinates: [52.6120, 39.5950] as [number, number]
+    },
+    {
+      id: 7,
+      name: 'Каратэ "Белый тигр"',
+      organization: 'Гимназия №64',
+      district: 'Правобережный',
+      category: 'Спорт',
+      age: '7-14 лет',
+      price: 'Бесплатно',
+      time: 'Вечер',
+      address: 'ул. Неделина, 15',
+      schedule: 'ПН, СР, ПТ 18:00-19:30',
+      phone: '+7 (4742) 32-15-64',
+      coordinates: [52.6035, 39.6145] as [number, number]
     }
   ];
 
