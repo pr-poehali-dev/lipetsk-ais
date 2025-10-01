@@ -217,10 +217,10 @@ const Index = () => {
                 />
                 <div className="relative z-10 p-8">
                   <div className="max-w-3xl">
-                    <h2 className="text-3xl font-bold mb-3 text-white drop-shadow-lg">Найдите идеальный кружок для вашего ребёнка</h2>
+                    <h2 className="text-3xl font-bold mb-3 text-white drop-shadow-lg">АИС «Секции и кружки Липецка»</h2>
                     <p className="text-lg mb-6 text-white drop-shadow-md">
-                      Более 500 секций и кружков Липецка в одной системе. 
-                      Удобный поиск, электронная запись и карта организаций.
+                      Автоматизированная информационная система для записи детей в секции и кружки. 
+                      Умный поиск по параметрам, интерактивная карта организаций и электронная запись онлайн.
                     </p>
                     <Button 
                       size="lg" 
