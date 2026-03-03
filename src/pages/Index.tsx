@@ -58,7 +58,7 @@ const Index = () => {
       photo: 'https://cdn.poehali.dev/files/child-girl.jpg',
       activities: ['Каратэ'],
       achievements: [
-        { id: 6, title: 'Белый пояс', event: 'Аттестация по каратэ', date: '2024-05-10', type: 'certificate', activity: 'Каратэ' },
+        { id: 6, title: 'Синий пояс', event: 'Аттестация по каратэ', date: '2024-05-10', type: 'certificate', activity: 'Каратэ' },
         { id: 7, title: 'Диплом за участие', event: 'Турнир "Белый тигр"', date: '2024-06-15', type: 'diploma', activity: 'Каратэ' }
       ],
       ratings: [
